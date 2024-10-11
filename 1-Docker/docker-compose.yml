@@ -1,0 +1,66 @@
+version: '3'
+
+services:
+
+  mysql:
+    image: mysql@sha256:d8df069848906979fd7511db00dc22efeb0a33a990d87c3c6d3fcdafd6fc6123
+    container_name: mysql
+    volumes:
+      - $HOME/data/mysql:/var/lib/mysql
+      - /etc/localtime:/etc/localtime:ro # sync with localhost time
+    ports:
+      - '3306:3306'
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: xxxxxx
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wp
+      MYSQL_PASSWORD: xxxxxx
+      
+
+  alist:
+    image: xhofe/alist@sha256:9f12da24e126681d35a50cc645595b3ebe33c77af1a990e35ede9b8f17952623
+    container_name: alist
+    volumes:
+      - /etc/alist:/opt/alist/data
+    ports:
+      - '5244:5244'
+    restart: unless-stopped
+    environment:
+      - PUID=0
+      - PGID=0
+      - UMASK=022
+      - TZ=Asia/Shanghai
+
+  wordpress:
+    depends_on:
+      - mysql
+    image: wordpress@sha256:b612480cecd8fd35d7b81c72865feee47b6b8f56f887ddb15629acb3230589c5
+    container_name: wp
+    volumes:
+      - $HOME/data/wordpress:/var/www/html
+    ports:
+      - '6773:80'
+    restart: unless-stopped
+    environment:
+      WORDPRESS_DB_HOST: mysql:3306
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: xxxxxx
+      WORDPRESS_DB_NAME: wordpress
+
+  teamspeak:
+    image: teamspeak@sha256:26c2cf352bfc77f0b2340ee5546986d0c8206648d7c97743785165c6facc74a8
+    container_name: tsserver
+    volumes:
+      - $HOME/data/teamspeak:/var/ts3server
+    ports:
+      - 9987:9987/udp # Voice
+      - 30033:30033 # FileTransfer
+      - 10011:10011 # ServerQuery (raw)
+      # - 10022:10022 # ServerQuery (SSH)
+      # - 10080:10080 # WebQuery (http)
+      # - 10443:10443 # WebQuery (https)
+      # - 41144:41144 # TeamSpeakDNS
+    restart: unless-stopped
+    environment:
+      TS3SERVER_LICENSE: accept
