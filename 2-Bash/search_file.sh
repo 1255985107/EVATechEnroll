@@ -7,7 +7,7 @@ search() {
     local count=0
 
     while IFS= read -r -d '' file; do # find folders
-        echo "${file/#$HOME/\~}"
+        echo -e "\e[3;34m${file/#$HOME/\~}\e[0m"
         let "count++"
     done < <(find "$directory" -type f -name "*.$extension" -print0)
     echo "Total $count files."
@@ -31,7 +31,7 @@ while [[ "$#" -gt 0 ]]; do
         --directory) directory=$2; shift;;
         --interactive) interactive=1;;
         --help) show_help; exit;;
-        *) echo "Unknown option: $1"; show_help; exit 1;;
+        *) echo -e "\e[2;31mUnknown option: $1\e[0m"; show_help; exit 1;;
     esac
     shift
 done
@@ -49,7 +49,7 @@ if [[ -n $interactive ]]; then # interactive
     done
 else # not interactive
     if [[ -z "$extension" || -z "$directory" ]]; then
-        echo "Error: Both --extension and --directory must be specified."
+        echo "\e[2;31mError: Both --extension and --directory must be specified.\e[0m"
         show_help
         exit 1
     fi
