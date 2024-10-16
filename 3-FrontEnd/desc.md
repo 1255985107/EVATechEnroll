@@ -22,19 +22,19 @@
 
 样例：
 
-1.  网页刚刚加载&#x20;
+1.  网页刚刚加载
 
 ![](https://github.com/jeffreyqjf/zjueva-tech-joinus-internal/blob/master/img/p1_YDG9sgo3rv.png)
 
-1.  在文本框中输入"3"并点击"生成"按钮
+2.  在文本框中输入"3"并点击"生成"按钮
 
 ![](https://github.com/jeffreyqjf/zjueva-tech-joinus-internal/blob/master/img/p2_d8lLSjKqx0.png)
 
-1.  左键单击最左侧的小方块&#x20;
+3.  左键单击最左侧的小方块
 
 ![](https://github.com/jeffreyqjf/zjueva-tech-joinus-internal/blob/master/img/p3_zTbicgK-TB.png)
 
-1.  再次点击"生成"按钮
+4.  再次点击"生成"按钮
 
 ![](https://github.com/jeffreyqjf/zjueva-tech-joinus-internal/blob/master/img/p4_Yd9bfVwRC0.png)
 
